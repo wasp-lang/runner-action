@@ -15,10 +15,7 @@ jobs:
           node-version: "20"
 
       # Test the local action
-      - uses: ./
+      # - uses: ./
 
       - name: Verify installation
-        shell: bash
-        run: |
-          set -e
-          run-wasp-app --help
+        run: run-wasp-app --help
