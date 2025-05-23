@@ -1,0 +1,21 @@
+name: Test Wasp App Runner Action
+on:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # Test the local action
+      - uses: ./
+
+      - name: Verify installation
+        run: run-wasp-app --help
