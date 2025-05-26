@@ -35,5 +35,4 @@ runs:
         npm_config_cache: ${{ github.workspace }}/.wasp-app-runner/.npm-cache
       run: |
         npm ci
-        npm run build 
-        npm install -g .
+        npm install:global
