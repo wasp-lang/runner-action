@@ -17,7 +17,6 @@ runs:
         restore-keys: |
           npm-${{ runner.os }}-
 
-
     - name: Install dependencies and Wasp App Runner
       shell: bash
       working-directory: .wasp-app-runner/wasp-app-runner
