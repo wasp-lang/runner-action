@@ -15,7 +15,7 @@ jobs:
           node-version: "20"
 
       - name: Create test file
-        run: echo "hello" > test-file.txt
+        run: touch test-file.txt
 
       # Test the local action
       - uses: ./
