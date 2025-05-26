@@ -6,11 +6,19 @@ runs:
     - name: Checkout wasp-app-runner
       uses: actions/checkout@v4
       with:
-        path: ".wasp-app-runner"
+        path: ${{ runner.temp }}/wasp-app-runner
+
+    - name: Cache node modules
+      uses: actions/cache@v4
+      with:
+        path: ~/.npm
+        key: npm-${{ runner.os }}-${{ hashFiles('wasp-app-runner/package-lock.json') }}
+        restore-keys: |
+          npm-${{ runner.os }}-
 
     - name: Install dependencies and Wasp App Runner
       shell: bash
-      working-directory: ./.wasp-app-runner/wasp-app-runner
+      working-directory: ${{ runner.temp }}/wasp-app-runner/wasp-app-runner
       run: |
         npm ci
         npm run install:global
