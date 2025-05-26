@@ -1,4 +1,4 @@
-name: "Wasp App Runner"
+name: "Set up Wasp App Runner"
 description: "Set up Wasp App Runner for use in GitHub Actions workflows"
 runs:
   using: "composite"
