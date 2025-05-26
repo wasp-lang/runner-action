@@ -14,8 +14,14 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Create test file
+        run: echo "hello" > test-file.txt
+
       # Test the local action
       - uses: ./
 
       - name: Verify installation
         run: run-wasp-app --help
+
+      - name: Check test file still exists
+        run: test -f test-file.txt
