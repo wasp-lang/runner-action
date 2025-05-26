@@ -13,9 +13,9 @@ runs:
       uses: actions/cache@v4
       with:
         path: ~/.npm
-        key: npm-${{ runner.os }}-${{ hashFiles('.wasp-app-runner/package-lock.json') }}
+        key: npm-wasp-app-runner-${{ runner.os }}-${{ hashFiles('.wasp-app-runner/package-lock.json') }}
         restore-keys: |
-          npm-${{ runner.os }}-
+          npm-wasp-app-runner-${{ runner.os }}-
 
     - name: Install dependencies and Wasp App Runner
       shell: bash

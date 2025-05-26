@@ -23,5 +23,8 @@ jobs:
       - name: Verify installation
         run: run-wasp-app --help
 
+      # Checks that the file was not overwritten
+      # by the wasp-app-runner checkout action.
+      # This is to be sure that we preserve the caller's workspace.
       - name: Check test file still exists
         run: test -f test-file.txt
