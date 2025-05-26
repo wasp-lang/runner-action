@@ -1,24 +1,25 @@
 name: "Set up Wasp App Runner"
 description: "Set up Wasp App Runner for use in GitHub Actions workflows"
+
 runs:
   using: "composite"
   steps:
     - name: Checkout wasp-app-runner
       uses: actions/checkout@v4
       with:
-        path: ${{ runner.temp }}/wasp-app-runner
+        path: .wasp-app-runner
 
-    - name: Cache node modules
+    - name: Cache npm cache
       uses: actions/cache@v4
       with:
         path: ~/.npm
-        key: npm-${{ runner.os }}-${{ hashFiles('wasp-app-runner/package-lock.json') }}
+        key: npm-${{ runner.os }}-${{ hashFiles('.wasp-app-runner/package-lock.json') }}
         restore-keys: |
           npm-${{ runner.os }}-
 
     - name: Install dependencies and Wasp App Runner
       shell: bash
-      working-directory: ${{ runner.temp }}/wasp-app-runner/wasp-app-runner
+      working-directory: .wasp-app-runner/wasp-app-runner
       run: |
         npm ci
         npm run install:global
