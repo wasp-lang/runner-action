@@ -17,6 +17,7 @@ runs:
     - name: Checkout wasp-app-runner
       uses: actions/checkout@v4
       with:
+        repository: wasp-lang/runner-action
         path: ${{ inputs.path }}
 
     - name: Setup Node.js
