@@ -30,7 +30,7 @@ runs:
 
     - name: Install dependencies and Wasp App Runner
       shell: bash
-      working-directory: .wasp-app-runner/wasp-app-runner
+      working-directory: .wasp-app-runner
       env:
         npm_config_cache: ${{ github.workspace }}/.wasp-app-runner/.npm-cache
       run: |
