@@ -5,7 +5,7 @@ on:
       - "**"
 
 jobs:
-  test:
+  test-default:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -13,14 +13,30 @@ jobs:
       - name: Create test file
         run: touch test-file.txt
 
-      # Test the local action
+      # Test the local action with default path
       - uses: ./
 
       - name: Verify installation
         run: run-wasp-app --help
 
-      # Checks that the file was not overwritten
-      # by the wasp-app-runner checkout action.
-      # This is to be sure that we preserve the caller's workspace.
+      - name: Check test file still exists
+        run: test -f test-file.txt
+
+  test-custom-path:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create test file
+        run: touch test-file.txt
+
+      # Test the local action with custom path input
+      - uses: ./
+        with:
+          path: custom-runner-dir
+
+      - name: Verify installation
+        run: run-wasp-app --help
+
       - name: Check test file still exists
         run: test -f test-file.txt
