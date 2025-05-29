@@ -1,0 +1,37 @@
+name: "Set up Wasp App Runner"
+description: |
+  Set up Wasp App Runner for use in GitHub Actions workflows
+
+  **Note:** You must set up Node.js before using this action.
+
+inputs:
+  path:
+    description: "Path where to checkout the Wasp App Runner repository"
+    required: false
+    default: ".wasp-app-runner"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout wasp-app-runner
+      uses: actions/checkout@v4
+      with:
+        repository: wasp-lang/runner-action
+        path: ${{ inputs.path }}
+
+    - name: Cache npm cache
+      uses: actions/cache@v4
+      with:
+        path: ${{ inputs.path }}/.npm-cache
+        key: npm-wasp-app-runner-${{ runner.os }}-${{ hashFiles(format('{0}/package-lock.json', inputs.path)) }}
+        restore-keys: |
+          npm-wasp-app-runner-${{ runner.os }}-
+
+    - name: Install dependencies and Wasp App Runner
+      shell: bash
+      working-directory: ${{ inputs.path }}
+      env:
+        npm_config_cache: ${{ github.workspace }}/${{ inputs.path }}/.npm-cache
+      run: |
+        npm ci
+        npm run install:global
