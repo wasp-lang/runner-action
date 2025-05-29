@@ -78,9 +78,3 @@ e.g. by using `actions/setup-node` action
   with:
     node-version: 20
 ```
-
-### Input
-
-| Name | Description                                           | Default            |
-| ---- | ----------------------------------------------------- | ------------------ |
-| path | Path where to checkout the Wasp App Runner repository | `.wasp-app-runner` |
