@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { createLogger } from "./logging.js";
 import { checkDependencies } from "./dependencies.js";
 import { waspInfo } from "./waspCli.js";
