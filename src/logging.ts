@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import chalk, { type ChalkInstance } from "chalk";
 
 type LogType = "error" | "warn" | "info" | "success" | "debug";
