@@ -35,3 +35,8 @@ runs:
       run: |
         npm ci
         npm run install:global
+
+    - name: Post-install cleanup
+      shell: bash
+      run: |
+        rm -rf ${{ inputs.path }}
