@@ -7,7 +7,6 @@
   },
   "scripts": {
     "build": "tsc",
-    "prepare": "",
     "start": "npm run build && node ./bin/index.js",
     "install:global": "./scripts/install-global.sh"
   },
