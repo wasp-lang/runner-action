@@ -8,8 +8,8 @@
   "scripts": {
     "build": "tsc",
     "start": "npm run build && node ./bin/index.js",
-    "install:global": "npm run build && npm install -g .",
-    "prepublishOnly": "npm ci && npm run build"
+    "prepare": "npm run build",
+    "install:global": "./scripts/install-global.sh"
   },
   "dependencies": {
     "@commander-js/extra-typings": "^13.1.0",
