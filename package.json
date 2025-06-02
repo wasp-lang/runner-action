@@ -8,7 +8,6 @@
   "scripts": {
     "build": "tsc",
     "start": "npm run build && node ./bin/index.js",
-    "prepare": "npm run build",
     "install:global": "./scripts/install-global.sh"
   },
   "dependencies": {
