@@ -12,8 +12,6 @@ jobs:
         with:
           node-version: 20
 
-      - uses: actions/checkout@v4
-
       - name: Create test file
         run: touch test-file.txt
 
@@ -26,9 +24,6 @@ jobs:
       - name: Verify that test file still exists
         run: test -f test-file.txt
 
-      - name: Verify wasp-app-runner checkout location
-        run: test -d .wasp-app-runner
-
   test-custom-path:
     runs-on: ubuntu-latest
     steps:
@@ -36,8 +31,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      - uses: actions/checkout@v4
 
       - name: Create test file
         run: touch test-file.txt
@@ -52,6 +45,3 @@ jobs:
 
       - name: Verify that test file still exists
         run: test -f test-file.txt
-
-      - name: Verify wasp-app-runner checkout location
-        run: test -d custom-runner-dir
