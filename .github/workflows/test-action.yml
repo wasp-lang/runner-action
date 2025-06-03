@@ -13,9 +13,6 @@ jobs:
           node-version: 20
 
       - uses: actions/checkout@v4
-        with:
-          repository: ${{ github.repository }}
-          ref: ${{ github.ref }}
 
       - name: Create test file
         run: touch test-file.txt
@@ -41,9 +38,6 @@ jobs:
           node-version: 20
 
       - uses: actions/checkout@v4
-        with:
-          repository: ${{ github.repository }}
-          ref: ${{ github.ref }}
 
       - name: Create test file
         run: touch test-file.txt
