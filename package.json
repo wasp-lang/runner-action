@@ -9,7 +9,7 @@
     "build": "tsc",
     "start": "npm run build && node ./bin/index.js",
     "prepare": "npm run build",
-    "install:global": "./scripts/install-global.sh"
+    "install:global": "npm install -g ."
   },
   "dependencies": {
     "@commander-js/extra-typings": "^13.1.0",
