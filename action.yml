@@ -14,6 +14,7 @@ runs:
   using: "composite"
   steps:
     - name: Print repo, branch, and sha
+      shell: bash
       run: echo "Repository: ${{ github.repository }}, Branch: ${{ github.ref }}, SHA: ${{ github.sha }}"
 
     - name: Checkout wasp-app-runner (current repo, use triggering commit)
