@@ -34,5 +34,5 @@ runs:
         npm_config_cache: ${{ github.workspace }}/${{ inputs['checkout-path'] }}/.npm-cache
       run: |
         npm ci
-        PACKAGE_TGZ=$(npm pack --silent)
+        PACKAGE_TGZ=$(npm pack)
         npm install -g "$PACKAGE_TGZ"
