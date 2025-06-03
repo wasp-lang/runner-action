@@ -5,4 +5,5 @@ npm ci
 npm run build
 FILENAME=$(npm pack --silent)
 npm install -g "./$FILENAME"
+sleep 2
 rm "./$FILENAME"
