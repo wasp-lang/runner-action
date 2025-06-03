@@ -13,11 +13,19 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Checkout wasp-app-runner
+    - name: Checkout wasp-app-runner (current repo, use triggering commit)
+      if: ${{ github.repository == 'wasp-lang/runner-action' }}
       uses: actions/checkout@v4
       with:
         repository: wasp-lang/runner-action
-        ref: franjo/runner-action
+        path: ${{ inputs['checkout-path'] }}
+        ref: ${{ github.sha }}
+
+    - name: Checkout wasp-app-runner (external repo, use default branch)
+      if: ${{ github.repository != 'wasp-lang/runner-action' }}
+      uses: actions/checkout@v4
+      with:
+        repository: wasp-lang/runner-action
         path: ${{ inputs['checkout-path'] }}
 
     - name: Cache npm cache
@@ -34,4 +42,5 @@ runs:
       env:
         npm_config_cache: ${{ github.workspace }}/${{ inputs['checkout-path'] }}/.npm-cache
       run: |
-        npm run gi
+        npm ci
+        npm install -g "$(npm pack --silent)"
