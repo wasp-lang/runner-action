@@ -42,10 +42,10 @@ jobs:
       - name: Create test file
         run: touch test-file.txt
 
-      # Test the local action with custom path input
+      # Test the local action with custom checkout-path input
       - uses: ./
         with:
-          path: custom-runner-dir
+          checkout-path: custom-runner-dir
 
       - name: Verify wasp-app-runner checkout location
         run: test -d custom-runner-dir
