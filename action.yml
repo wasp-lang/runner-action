@@ -5,7 +5,7 @@ description: |
   **Note:** You must set up Node.js before using this action.
 
 inputs:
-  path:
+  checkout-path:
     description: "Path where to checkout the Wasp App Runner repository"
     required: false
     default: ".wasp-app-runner"
@@ -17,21 +17,21 @@ runs:
       uses: actions/checkout@v4
       with:
         repository: wasp-lang/runner-action
-        path: ${{ inputs.path }}
+        path: ${{ inputs['checkout-path'] }}
 
     - name: Cache npm cache
       uses: actions/cache@v4
       with:
-        path: ${{ inputs.path }}/.npm-cache
-        key: npm-wasp-app-runner-${{ runner.os }}-${{ hashFiles(format('{0}/package-lock.json', inputs.path)) }}
+        path: ${{ inputs['checkout-path'] }}/.npm-cache
+        key: npm-wasp-app-runner-${{ runner.os }}-${{ hashFiles(format('{0}/package-lock.json', inputs['checkout-path'])) }}
         restore-keys: |
           npm-wasp-app-runner-${{ runner.os }}-
 
     - name: Install dependencies and Wasp App Runner
       shell: bash
-      working-directory: ${{ inputs.path }}
+      working-directory: ${{ inputs['checkout-path'] }}
       env:
-        npm_config_cache: ${{ github.workspace }}/${{ inputs.path }}/.npm-cache
+        npm_config_cache: ${{ github.workspace }}/${{ inputs['checkout-path'] }}/.npm-cache
       run: |
         npm ci
         npm run install:global
