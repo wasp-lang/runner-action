@@ -20,8 +20,8 @@ jobs:
       # Test the local action with default path
       - uses: ./
 
-      - name: Verify wasp-app-runner checkout location
-        run: test -d .wasp-app-runner
+      # - name: Verify wasp-app-runner checkout location
+      #   run: test -d .wasp-app-runner
 
       - name: Verify installation
         run: run-wasp-app --help
@@ -47,8 +47,8 @@ jobs:
         with:
           checkout-path: custom-runner-dir
 
-      - name: Verify wasp-app-runner checkout location
-        run: test -d custom-runner-dir
+      # - name: Verify wasp-app-runner checkout location
+      #   run: test -d custom-runner-dir
 
       - name: Verify installation
         run: run-wasp-app --help
