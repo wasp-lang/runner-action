@@ -13,6 +13,9 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Print repo, branch, and sha
+      run: echo "Repository: ${{ github.repository }}, Branch: ${{ github.ref }}, SHA: ${{ github.sha }}"
+
     - name: Checkout wasp-app-runner (current repo, use triggering commit)
       if: ${{ github.repository == 'wasp-lang/runner-action' }}
       uses: actions/checkout@v4
