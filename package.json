@@ -8,7 +8,8 @@
   "scripts": {
     "build": "tsc",
     "start": "npm run build && node ./bin/index.js",
-    "prepack": "npm run build"
+    "prepack": "npm run build",
+    "gi": "npm ci && npm install -g ."
   },
   "dependencies": {
     "@commander-js/extra-typings": "^13.1.0",

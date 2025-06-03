@@ -33,5 +33,4 @@ runs:
       env:
         npm_config_cache: ${{ github.workspace }}/${{ inputs['checkout-path'] }}/.npm-cache
       run: |
-        npm ci
-        npm install -g .
+        npm run gi
