@@ -17,6 +17,7 @@ runs:
       uses: actions/checkout@v4
       with:
         repository: wasp-lang/runner-action
+        ref: franjo/runner-action
         path: ${{ inputs['checkout-path'] }}
 
     - name: Cache npm cache
