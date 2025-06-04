@@ -1,0 +1,44 @@
+name: "Set up Wasp App Runner"
+description: |
+  Set up Wasp App Runner for use in GitHub Actions workflows
+
+  **Note:** You must set up Node.js before using this action.
+
+inputs:
+  wasp-app-runner-ref:
+    description: "Git ref (branch, tag, or SHA) to checkout for Wasp App Runner. For development purposes."
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout wasp-app-runner
+      uses: actions/checkout@v4
+      with:
+        repository: wasp-lang/runner-action
+        path: .wasp-app-runner
+        ref: ${{ inputs['wasp-app-runner-ref'] }}
+
+    - name: Cache npm cache
+      uses: actions/cache@v4
+      with:
+        path: .wasp-app-runner/.npm-cache
+        key: npm-wasp-app-runner-${{ runner.os }}-${{ hashFiles('.wasp-app-runner/package-lock.json') }}
+        restore-keys: |
+          npm-wasp-app-runner-${{ runner.os }}-
+
+    - name: Install dependencies and Wasp App Runner
+      shell: bash
+      working-directory: .wasp-app-runner
+      env:
+        npm_config_cache: ${{ github.workspace }}/.wasp-app-runner/.npm-cache
+      run: |
+        npm ci
+        # Create a tarball of the package (suppressing info logs, so only the path is returned), then install it globally.
+        # This avoids symlink issues that can happen with local installs.
+        npm install -g "$(npm pack --silent)"
+
+    - name: Cleanup
+      shell: bash
+      run: |
+        rm -rf .wasp-app-runner
