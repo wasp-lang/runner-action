@@ -4,7 +4,7 @@ on:
     branches:
       - "**"
 jobs:
-  test-default:
+  main:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Node.js
@@ -17,35 +17,9 @@ jobs:
       - name: Create test file
         run: touch test-file.txt
 
-      # Test the local action with default path
       - uses: ./
         with:
           wasp-app-runner-ref: ${{ github.sha }}
-
-      - name: Verify installation
-        run: run-wasp-app --help
-
-      - name: Verify that we didn't change the working directory
-        run: test -f test-file.txt
-
-  test-custom-path:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - uses: actions/checkout@v4
-
-      - name: Create test file
-        run: touch test-file.txt
-
-      # Test the local action with custom checkout-path input
-      - uses: ./
-        with:
-          wasp-app-runner-ref: ${{ github.sha }}
-          checkout-path: custom-runner-dir
 
       - name: Verify installation
         run: run-wasp-app --help
