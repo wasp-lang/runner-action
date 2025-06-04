@@ -43,6 +43,8 @@ runs:
         npm_config_cache: ${{ github.workspace }}/${{ inputs['checkout-path'] }}/.npm-cache
       run: |
         npm ci
+        # Create a tarball of the package (suppressing info logs, so only the path is returned), then install it globally.
+        # This avoids symlink issues that can happen with local installs.
         npm install -g "$(npm pack --silent)"
 
     - name: Cleanup
