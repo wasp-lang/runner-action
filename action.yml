@@ -14,7 +14,7 @@ runs:
   using: "composite"
   steps:
     - name: Checkout wasp-app-runner (current repo, use triggering commit)
-      if: ${{ github.repository == 'wasp-lang/runner-action' }}
+      if: ${{ github.repository == github.action_repository }}
       uses: actions/checkout@v4
       with:
         repository: wasp-lang/runner-action
@@ -22,7 +22,7 @@ runs:
         ref: ${{ github.sha }}
 
     - name: Checkout wasp-app-runner (external repo, use default branch)
-      if: ${{ github.repository != 'wasp-lang/runner-action' }}
+      if: ${{ github.repository != github.action_repository }}
       uses: actions/checkout@v4
       with:
         repository: wasp-lang/runner-action
