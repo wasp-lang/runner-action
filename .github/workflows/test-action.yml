@@ -19,6 +19,8 @@ jobs:
 
       # Test the local action with default path
       - uses: ./
+        with:
+          wasp-app-runner-ref: ${{ github.sha }}
 
       - name: Verify installation
         run: run-wasp-app --help
@@ -42,6 +44,7 @@ jobs:
       # Test the local action with custom checkout-path input
       - uses: ./
         with:
+          wasp-app-runner-ref: ${{ github.sha }}
           checkout-path: custom-runner-dir
 
       - name: Verify installation

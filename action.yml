@@ -9,29 +9,24 @@ inputs:
     description: "Path where to checkout the Wasp App Runner repository"
     required: false
     default: ".wasp-app-runner"
+  wasp-app-runner-ref:
+    description: "Git ref (branch, tag, or SHA) to checkout for Wasp App Runner. For development purposes."
+    required: false
 
 runs:
   using: "composite"
   steps:
-    - name: Checkout wasp-app-runner (current repo, use triggering commit)
-      if: ${{ github.repository == github.action_repository }}
+    - name: Checkout wasp-app-runner
       uses: actions/checkout@v4
       with:
         repository: wasp-lang/runner-action
         path: ${{ inputs['checkout-path'] }}
-        ref: ${{ github.sha }}
-
-    - name: Checkout wasp-app-runner (external repo, use default branch)
-      if: ${{ github.repository != github.action_repository }}
-      uses: actions/checkout@v4
-      with:
-        repository: wasp-lang/runner-action
-        path: ${{ inputs['checkout-path'] }}
+        ref: ${{ inputs['wasp-app-runner-ref'] }}
 
     - name: Cache npm cache
       uses: actions/cache@v4
       with:
-        path: ${{ inputs['checkout-path'] }}/.npm-cache
+        path: ${{ inputs['checkout-patWh'] }}/.npm-cache
         key: npm-wasp-app-runner-${{ runner.os }}-${{ hashFiles(format('{0}/package-lock.json', inputs['checkout-path'])) }}
         restore-keys: |
           npm-wasp-app-runner-${{ runner.os }}-
