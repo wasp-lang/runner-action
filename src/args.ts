@@ -22,12 +22,6 @@ export function parseArgs(): {
     .option("--wasp-cli-cmd <command>", "Wasp CLI command to use", "wasp")
     .parse();
 
-  if (process.argv.length === 2) {
-    program.help();
-  }
-
-  program.parse();
-
   const options = parsedProgram.opts();
   const args = parsedProgram.processedArgs;
 
