@@ -5,6 +5,10 @@
   "bin": {
     "run-wasp-app": "bin/index.js"
   },
+  "files": [
+    "bin",
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "start": "npm run build && node ./bin/index.js",
