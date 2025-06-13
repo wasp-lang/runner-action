@@ -16,7 +16,9 @@ export function parseArgs(): {
     .description("Run the Wasp application")
     .version(packageJson.version)
     .addArgument(
-      new Argument("[mode]", "The run mode").choices(["dev", "build"])
+      new Argument("mode", "The run mode")
+      .argRequired()
+      .choices(["dev", "build"])
     )
     .option("--path-to-app <path>", "Path to the Wasp application", ".")
     .option("--wasp-cli-cmd <command>", "Wasp CLI command to use", "wasp")
@@ -25,12 +27,8 @@ export function parseArgs(): {
   const options = parsedProgram.opts();
   const [mode] = parsedProgram.processedArgs;
 
-  if (mode === undefined) {
-    parsedProgram.help();
-  }
-
   return {
-    mode: mode as Mode,
+    mode: mode,
     pathToApp: options.pathToApp as PathToApp,
     waspCliCmd: options.waspCliCmd as WaspCliCmd,
   };
