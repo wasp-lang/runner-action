@@ -123,7 +123,7 @@ export async function waspTsSetup({
   });
 
   if (exitCode !== 0) {
-    logger.error(`Failed to set up TypeScript: ${stderrData}`);
+    logger.error(`Failed to set up Wasp TypeScript config: ${stderrData}`);
     process.exit(1);
   }
 }
