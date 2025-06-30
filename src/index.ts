@@ -1,9 +1,10 @@
-import { createLogger } from "./logging.js";
-import { checkDependencies } from "./dependencies.js";
-import { waspInfo } from "./waspCli.js";
-import { startAppInDevMode } from "./dev/index.js";
-import { startAppInBuildMode } from "./build/index.js";
 import { type Mode, parseArgs, PathToApp, WaspCliCmd } from "./args.js";
+import { startAppInBuildMode } from "./build/index.js";
+import { checkDependencies } from "./dependencies.js";
+import { startAppInDevMode } from "./dev/index.js";
+import { createLogger } from "./logging.js";
+import { waspInfo, waspTsSetup } from "./waspCli.js";
+import { isWaspTypescriptConfigProject } from "./waspTsConfig.js";
 
 const logger = createLogger("main");
 
@@ -41,6 +42,13 @@ async function runWaspApp({
     waspCliCmd,
     pathToApp,
   });
+
+  if (await isWaspTypescriptConfigProject(pathToApp)) {
+    await waspTsSetup({
+      waspCliCmd,
+      pathToApp,
+    });
+  }
 
   logger.info(
     `Starting "${appName}" app (mode: ${mode}) using "${waspCliCmd}" command`
