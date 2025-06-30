@@ -9,7 +9,7 @@ export async function isWaspTypescriptConfigProject(pathToApp: PathToApp) {
     const files = await readdir(pathToApp);
     return files.some((file) => file.endsWith(".wasp.ts"));
   } catch (error) {
-    logger.error(`Failed to read directory ${pathToApp}: ${String(error)}`);
+    logger.error(`Failed to read directory ${pathToApp}: ${error}`);
     process.exit(1);
   }
 }
