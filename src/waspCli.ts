@@ -20,7 +20,9 @@ export function waspMigrateDb({
   return spawnWithLog({
     name: "wasp-migrate-db",
     cmd: waspCliCmd,
-    args: ["db", "migrate-dev"],
+    // We use --name flag to ensure the commands succeeds even if there are migration files missing.
+    // The name is already timestamped by prisma, so we don't need to do it ourselves.
+    args: ["db", "migrate-dev", "--name", "auto-migration"],
     cwd: pathToApp,
     extraEnv,
   });
