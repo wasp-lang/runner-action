@@ -24,7 +24,7 @@ export function waspMigrateDb({
      * We use the --name flag because sometimes we run apps without a migrations directory,
      * which causes Prisma to prompt for a migration name interactively. This would make
      * the runner wait for input indefinitely.
-     * The migration filename is already timestamped by Prisma.
+     * Prisma timestamps all migration filenames automatically.
      * See: https://github.com/wasp-lang/runner-action/issues/7
      */
     args: ["db", "migrate-dev", "--name", "auto-migration"],
